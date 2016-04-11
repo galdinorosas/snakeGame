@@ -5,8 +5,20 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
+    html body {
+        background-color: transparent;
+    }
+    
     body {
         font: 200 1em 'Segoe UI', 'Helvetica Neue', 'Droid Sans';
+    }
+    
+    html {
+        background: url('images/background.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
     }
     
     #score {
@@ -18,7 +30,7 @@
     #intro {
         background-color: #868b73;
         height: 100%;
-        width: 100%;
+        width: 101%;
         padding-top: 8em;
     }
     
@@ -44,7 +56,7 @@
         background-color: #868b73;
         display: none;
         height: 100%;
-        width: 100%;
+        width: 101%;
         text-align: center;
         padding-top: 8em;
     }
@@ -68,6 +80,7 @@
         border: 10px solid #868b73;
         margin: 0 auto;
         position: relative;
+        background-color: white;
     }
     
     #snake {
@@ -81,6 +94,35 @@
         position: absolute;
     }
     </style>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+
+<body>
+    <div id="score">
+        <span>Score</span>
+        <h1>0</h1>
+    </div>
+    <div id="container">
+        <div id="intro">
+            <p>
+                Snake Game
+            </p>
+            <p>
+                * Use the arrow keys to control the snakes direction *
+            </p>
+            <button id="startGameBtn" type="button" class="btn btn-success">Start Game</button>
+        </div>
+        <div id="gameOver">
+            <p>
+                Game Over
+            </p>
+            <button id="startGameBtn" type="button" class="btn btn-success">New Game</button>
+        </div>
+        <div id="snake">
+            <div></div>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     <script>
     $('document').ready(function() {
@@ -233,34 +275,6 @@
         }
     });
     </script>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-</head>
-
-<body>
-    <div id="score">
-        <span>Score</span>
-        <h1>0</h1>
-    </div>
-    <div id="container">
-        <div id="intro">
-            <p>
-                Snake Game
-            </p>
-            <p>
-                * Use the arrow keys to control the snakes direction *
-            </p>
-            <button id="startGameBtn" type="button" class="btn btn-success">Start Game</button>
-        </div>
-        <div id="gameOver">
-            <p>
-                Game Over
-            </p>
-            <button id="startGameBtn" type="button" class="btn btn-success">New Game</button>
-        </div>
-        <div id="snake">
-<div></div>
-        </div>
-    </div>
 </body>
 
 </html>
