@@ -138,7 +138,8 @@
             score,
             x,
             y,
-            moveSnake;
+            moveSnake,
+            snakeTailsArray;
 
 
         $('#intro #startGameBtn').on('click', function() {
@@ -188,7 +189,7 @@
 
         document.addEventListener('keydown', function(e) {
             snakeTails = document.getElementById('snake').children;
-            // console.log('snakeTails', snakeTails);
+
             directions(e.keyCode);
         });
 
@@ -208,21 +209,20 @@
             }
         }
 
-
         function movingSnake() {
             var dirXY = [];
             snake.style.marginLeft = (snakeX += x) + 'px';
             snake.style.marginTop = (snakeY += y) + 'px';
             dirXY.push(snakeX);
             dirXY.push(snakeY);
-            console.log('dirXY', dirXY);
             storeSteps.push(dirXY);
+
             if (snakeX == foodX && snakeY == foodY) {
                 container.removeChild(container.lastElementChild);
                 generateRandomFood();
                 createTail();
             }
-            // console.log('storestepslength',storeSteps.length,'snaketailslength',snakeTails.length);
+
             storeSteps.splice(0, storeSteps.length - snakeTails.length);
             for (var i = 0; i < snakeTails.length; i++) {
                 snakeTails[i].style.marginLeft = storeSteps[i][0] + 'px';
@@ -233,14 +233,37 @@
                 //                        }
                 //                    }
             }
-            //                console.log('storeSteps '+storeSteps);
+
+            selfCollide();
+
             if (boundary(snakeX, snakeY)) {
                 clearInterval(moveSnake);
                 $('#snake, #food').css('display', 'none');
                 $('#snake').empty();
                 $('#gameOver').fadeIn(1000, function() {});
+            }
+        }
 
+        function selfCollide() {
+            var count = 0;
+            for (var k = 0; k < snakeTails.length - 1; k++) {
+                var snakeHead = snakeTails[0];
+                var left = snakeHead.style.marginLeft;
+                var top = snakeHead.style.marginTop;
+                var bodyCheck = snakeTails[k];
+                var bodyLeft = bodyCheck.style.marginLeft;
+                var bodyTop = bodyCheck.style.marginTop;
 
+                if (left == bodyLeft && top == bodyTop) {
+                    count++;
+                }
+                if (count === 2) {
+
+                    $('#snake, #food').css('display', 'none');
+                    clearInterval(moveSnake);
+                    $('#snake').empty();
+                    $('#gameOver').fadeIn(1000, function() {});
+                }
             }
         }
 
